@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
     public function users(){
         $users = User::all();
         return response($users);
