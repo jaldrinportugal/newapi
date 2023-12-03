@@ -22,19 +22,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/books',[BooksController::class,'books']);
-Route::get('/books/{id}',[BooksController::class,'book']);
-Route::post('/store',[BooksController::class,'post']);
-Route::delete('/books/{id}',[BooksController::class,'delete']);
-Route::put('/update',[BooksController::class,'update']);
+
+
 // Route::get('/users',[UserController::class,'users']);
 // Route::get('/users/{id}',[UserController::class,'user']);
 // Route::delete('/users/{id}',[UserController::class,'delete']);
 
-// Route::middleware('auth:sanctum')->group(function (){
+Route::middleware('auth:sanctum')->group(function (){
 //     Route::get('/users',[UserController::class,'users']);
 //     Route::get('/users/{id}',[UserController::class,'user']);
 //     Route::delete('/users/{id}',[UserController::class,'delete']);
-// });
+    Route::get('/books',[BooksController::class,'books']);
+    Route::get('/books/{id}',[BooksController::class,'book']);
+    Route::post('/store',[BooksController::class,'post']);
+    Route::put('/update',[BooksController::class,'update']);
+    Route::delete('/books/{id}',[BooksController::class,'delete']);
+});
 
-// Route::post('/login',[AuthController::class,'login']);
+Route::post('/login',[AuthController::class,'login']);
