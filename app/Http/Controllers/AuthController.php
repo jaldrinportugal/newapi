@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // login function to make a bearer token
     public function login(Request $request){
         if(Auth::attempt([
             "email"=>$request->email,

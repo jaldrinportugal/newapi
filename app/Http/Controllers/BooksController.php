@@ -8,17 +8,20 @@ use App\Models\Books;
 
 class BooksController extends Controller
 {
-    public function Books(){
+    //use to search all books
+    public function index(){
         $book = Books::all();
         return response($book);
     }
 
-    public function Book($id){
+    // used to serach books by id
+    public function show($id){
         $book = Books::find($id);
         return response($book);
     }
 
-    public function post(Request $request)
+    // used to store a books
+    public function store(Request $request)
     {
         $book=new Books();
         $book->title = $request->title;
@@ -31,9 +34,10 @@ class BooksController extends Controller
         ]);
     }
 
+    // used to update books by id
     public function update(Request $request)
     {
-        $book = Books::findorfail($request->id);
+        $book = Books::find($request->id);
 
         $book->title = $request->title;
         $book->author = $request->author;
@@ -45,7 +49,8 @@ class BooksController extends Controller
         ]);
     }
 
-    public function delete($id){
+    // used to delete books by id
+    public function destroy($id){
         $user = Books::find($id);
         if ($user == null){
             return response([

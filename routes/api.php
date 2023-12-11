@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\StudentsController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,25 +19,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+    // Api route that does'nt need bearer token
+    Route::get('/books',[BooksController::class,'index']);
+    Route::get('/book/{id}',[BooksController::class,'show']);
 
-
-
-// Route::get('/users',[UserController::class,'users']);
-// Route::get('/users/{id}',[UserController::class,'user']);
-// Route::delete('/users/{id}',[UserController::class,'delete']);
-
+    Route::get('/students',[StudentsController::class,'index']);
+    Route::get('/student/{id}',[StudentsController::class,'show']);
+    
+    // Api route uses a bearer token
 Route::middleware('auth:sanctum')->group(function (){
-//     Route::get('/users',[UserController::class,'users']);
-//     Route::get('/users/{id}',[UserController::class,'user']);
-//     Route::delete('/users/{id}',[UserController::class,'delete']);
-    Route::get('/books',[BooksController::class,'books']);
-    Route::get('/books/{id}',[BooksController::class,'book']);
-    Route::post('/store',[BooksController::class,'post']);
-    Route::put('/update',[BooksController::class,'update']);
-    Route::delete('/books/{id}',[BooksController::class,'delete']);
+    Route::post('/book',[BooksController::class,'store']);
+    Route::put('/book/{id}',[BooksController::class,'update']);
+    Route::delete('/book/{id}',[BooksController::class,'destroy']);
+   
+    Route::post('/student',[StudentsController::class,'store']);
+    Route::put('/student/{id}',[StudentsController::class,'update']);
+    Route::delete('/student/{id}',[StudentsController::class,'destroy']);
 });
-
+// api route for login
 Route::post('/login',[AuthController::class,'login']);
